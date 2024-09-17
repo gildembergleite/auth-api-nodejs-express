@@ -8,7 +8,7 @@ import {
 
 export const register = async (req: Request, res: Response) => {
   const { email, password } = req.body
-  const existingUser = findUserByEmail(email)
+  const existingUser = await findUserByEmail(email)
   if (existingUser) {
     return res.status(400).json({ message: 'Email already exists' })
   }
@@ -18,7 +18,7 @@ export const register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body
-  const user = findUserByEmail(email)
+  const user = await findUserByEmail(email)
   if (!user) {
     return res.status(400).json({ message: 'Invalid email or password' })
   }
